@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Мой бар</string>
+    <string name="menu_account">Личный кабинет</string>
+    <string name="menu_shopping">Список покупок</string>
+    <string name="menu_favourite">Избранное</string>
+    <string name="menu_ingredients">Ингредиенты</string>
+    <string name="menu_cocktails">Коктейли</string>
+    <string name="action_settings">Настройки</string>
+    <string name="navigation_drawer_open">Открыть меню навигации</string>
+    <string name="navigation_drawer_close">Закрыть меню навигации</string>
+    <string name="nav_header_desc">Меню навигации</string>
+    <string name="nav_header_title">Меню</string>
+    <string name="nav_header_subtitle">Что-то написать</string>
+</resources>

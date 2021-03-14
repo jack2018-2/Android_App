@@ -2,12 +2,14 @@
     <string name="app_name">My Bar</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Menu</string>
+    <string name="nav_header_subtitle">Something to write</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
     <string name="menu_cocktails">Cocktails</string>
     <string name="menu_ingredients">Ingredients</string>
     <string name="menu_favourite">Favourite</string>
+    <string name="menu_shopping">Shopping list</string>
+    <string name="menu_account">My account</string>
 </resources>

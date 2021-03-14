@@ -4,9 +4,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/liquor__2_"
+        android:icon="@drawable/menu_3"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/liquor__2_"
+        android:roundIcon="@drawable/menu_3"
         android:supportsRtl="true"
         android:theme="@style/Theme.TZ">
         <activity
