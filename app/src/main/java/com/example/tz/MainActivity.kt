@@ -2,6 +2,8 @@ package com.example.tz
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -49,5 +51,13 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    fun openTest(item: MenuItem) {
+        Toast.makeText(applicationContext, "Эта кнопка запривачина гнида блять", Toast.LENGTH_SHORT).show()
+    }
+
+    fun openSettings(item: MenuItem) {
+        // R.id.action_settings
     }
 }
