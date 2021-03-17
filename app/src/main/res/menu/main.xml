@@ -6,14 +6,6 @@
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
-        app:showAsAction="never"
-        android:onClick="openSettings" />
-
-    <item
-        android:id="@+id/action_test"
-        android:orderInCategory="100"
-        android:title="TEST"
-        app:showAsAction="never"
-        android:onClick="openTest"/>
+        app:showAsAction="never" />
 
 </menu>

@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import android.content.Intent
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.nav_cocktails, R.id.nav_ingredients, R.id.nav_favourite, R.id.nav_shopping, R.id.nav_account), drawerLayout)
+                R.id.nav_cocktails, R.id.nav_ingredients, R.id.nav_favourite, R.id.nav_shopping), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
@@ -53,11 +54,15 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    fun openTest(item: MenuItem) {
-        Toast.makeText(applicationContext, "Эта кнопка запривачина гнида блять", Toast.LENGTH_SHORT).show()
-    }
 
-    fun openSettings(item: MenuItem) {
-        // R.id.action_settings
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when (item.itemId) {
+            R.id.action_settings -> {
+                startActivity(Intent(this, SettingsActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
