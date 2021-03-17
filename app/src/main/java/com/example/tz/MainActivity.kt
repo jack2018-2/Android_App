@@ -3,7 +3,6 @@ package com.example.tz
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -38,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.nav_cocktails, R.id.nav_ingredients, R.id.nav_favourite, R.id.nav_shopping), drawerLayout)
+                R.id.nav_cocktails, R.id.nav_ingredients, R.id.nav_favourite, R.id.nav_shopping, R.id.loginActivity), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
