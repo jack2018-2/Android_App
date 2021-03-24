@@ -1,11 +1,8 @@
 package com.example.tz.ui.ui.login
 
 import android.app.Activity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import android.content.Intent
 import android.os.Bundle
-import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
@@ -15,9 +12,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.tz.R
-import com.example.tz.ui.data.LoginRepository
-
+import com.example.tz.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -26,15 +26,23 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (true){
-            setContentView(R.layout.activity_login)
-        }
-        //setContentView(R.layout.activity_login)
+        //TODO: add user boolean function
+        setContentView(R.layout.activity_login)
+        //startActivity(Intent(this, LoggedUserFragment::class.java))
+
 
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
+        val register = findViewById<Button>(R.id.register)
         val loading = findViewById<ProgressBar>(R.id.loading)
+
+        register.isEnabled = true
+        register.setOnClickListener(View.OnClickListener {
+            //TODO: close login tab or not?
+            finish()
+            startActivity(Intent(this, RegisterActivity::class.java))
+        })
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
@@ -71,16 +79,16 @@ class LoginActivity : AppCompatActivity() {
 
         username.afterTextChanged {
             loginViewModel.loginDataChanged(
-                username.text.toString(),
-                password.text.toString()
+                    username.text.toString(),
+                    password.text.toString()
             )
         }
 
         password.apply {
             afterTextChanged {
                 loginViewModel.loginDataChanged(
-                    username.text.toString(),
-                    password.text.toString()
+                        username.text.toString(),
+                        password.text.toString()
                 )
             }
 
@@ -88,8 +96,8 @@ class LoginActivity : AppCompatActivity() {
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE ->
                         loginViewModel.login(
-                            username.text.toString(),
-                            password.text.toString()
+                                username.text.toString(),
+                                password.text.toString()
                         )
                 }
                 false
@@ -118,9 +126,9 @@ class LoginActivity : AppCompatActivity() {
         val displayName = model.displayName
         // TODO : initiate successful logged in experience
         Toast.makeText(
-            applicationContext,
-            "$welcome $displayName",
-            Toast.LENGTH_LONG
+                applicationContext,
+                "$welcome $displayName",
+                Toast.LENGTH_LONG
         ).show()
     }
 

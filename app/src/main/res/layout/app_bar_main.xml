@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/Theme.TZ.AppBarOverlay">
@@ -15,7 +16,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/teal_700"
+            android:background="?attr/colorSecondary"
+            app:layout_anchor="@+id/appBarLayout"
+            app:layout_anchorGravity="center"
             app:popupTheme="@style/Theme.TZ.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>

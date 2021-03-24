@@ -1,9 +1,12 @@
 package com.example.tz.ui.ui.login
 
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.util.Patterns
+import android.widget.EditText
 import com.example.tz.ui.data.LoginRepository
 import com.example.tz.ui.data.Result
 
