@@ -2,9 +2,10 @@ package com.example.tz.ui.cocktails
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,14 +24,16 @@ class CocktailsFragment : Fragment() {
     var mSwipeRefreshLayout: SwipeRefreshLayout? = null
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    var recyclerView: RecyclerView? = null
+    private var recyclerView: RecyclerView? = null
 
-    var myDB: MyDatabaseHelper? = null
-    var book_id: ArrayList<String>? = null
-    var book_author: ArrayList<String>? = null
-    var book_title: ArrayList<String>? = null
-    var book_pages: ArrayList<String>? = null
-    var customAdapter: CustomAdapter? = null
+    private var myDB: MyDatabaseHelper? = null
+    private var book_id: ArrayList<String>? = null
+    private var book_author: ArrayList<String>? = null
+    private var book_title: ArrayList<String>? = null
+    private var book_pages: ArrayList<String>? = null
+    private var customAdapter: CustomAdapter? = null
+    private var empty_imageview: ImageView? = null
+    private var no_data: TextView? = null
     ////////////////////////////////////////////////////////////////////////////////////////////////
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -43,7 +46,9 @@ class CocktailsFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_cocktails, container, false)
 
         recyclerView = root.findViewById(R.id.recyclerView)
-        mSwipeRefreshLayout = root.findViewById(R.id.swipe_refresh);
+        mSwipeRefreshLayout = root.findViewById(R.id.swipe_refresh)
+        empty_imageview = root.findViewById(R.id.empty_imageview)
+        no_data = root.findViewById(R.id.no_data)
 
         setSwipeRefreshLayout()
 
@@ -63,7 +68,7 @@ class CocktailsFragment : Fragment() {
         return root
     }
 
-    public fun setSwipeRefreshLayout() {
+    private fun setSwipeRefreshLayout() {
         mSwipeRefreshLayout?.setOnRefreshListener {
             // callback when swiped from top of screen
             // make your network request again, modify recycler adapter,etc
@@ -81,13 +86,18 @@ class CocktailsFragment : Fragment() {
 
     private fun storeDataInArrays() {
         val cursor = myDB!!.readAllData()
-        if (cursor!!.count == 0) {} else {
+        if (cursor!!.count == 0) {
+            empty_imageview?.visibility = View.VISIBLE
+            no_data?.visibility = View.VISIBLE
+        } else {
             while (cursor.moveToNext()) {
                 book_id!!.add(cursor.getString(0))
                 book_title!!.add(cursor.getString(1))
                 book_author!!.add(cursor.getString(2))
                 book_pages!!.add(cursor.getString(3))
             }
+            empty_imageview?.visibility = View.GONE
+            no_data?.visibility = View.GONE
         }
     }
 

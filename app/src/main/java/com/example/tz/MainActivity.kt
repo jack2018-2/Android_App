@@ -2,10 +2,8 @@ package com.example.tz
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -15,9 +13,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tz.sqlite.CustomAdapter
 import com.example.tz.sqlite.MyDatabaseHelper
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
@@ -28,14 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    var recyclerView: RecyclerView? = null
-
-    var myDB: MyDatabaseHelper? = null
-    var book_id: ArrayList<String>? = null
-    var book_author: ArrayList<String>? = null
-    var book_title: ArrayList<String>? = null
-    var book_pages: ArrayList<String>? = null
-    var customAdapter: CustomAdapter? = null
+    private var recyclerView: RecyclerView? = null
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,15 +34,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         recyclerView = findViewById(R.id.recyclerView)
-
-        myDB = MyDatabaseHelper(this@MainActivity)
-        book_id = ArrayList()
-        book_title = ArrayList()
-        book_author = ArrayList()
-        book_pages = ArrayList()
-
-        storeDataInArrays()
-
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener {
@@ -105,29 +85,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun storeDataInArrays() {
-        val cursor = myDB!!.readAllData()
-        if (cursor!!.count == 0) {
-            Toast.makeText(
-                    applicationContext,
-                    R.string.empty_db,
-                    Toast.LENGTH_LONG
-            ).show()
-        } else {
-            while (cursor.moveToNext()) {
-                book_id!!.add(cursor.getString(0))
-                book_title!!.add(cursor.getString(1))
-                book_author!!.add(cursor.getString(2))
-                book_pages!!.add(cursor.getString(3))
-            }
-        }
-    }
-
-    fun confirmDialog() {
+    private fun confirmDialog() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Delete All?")
         builder.setMessage("Are you sure you want to delete all Data?")
-        builder.setPositiveButton("Yes") { dialogInterface, i ->
+        builder.setPositiveButton("Yes") { _, _ ->
             val myDB = MyDatabaseHelper(this@MainActivity)
             myDB.deleteAllData()
             //Refresh Activity
@@ -135,7 +97,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        builder.setNegativeButton("No") { dialogInterface, i -> }
+        builder.setNegativeButton("No") { _, _ -> }
         builder.create().show()
     }
 
