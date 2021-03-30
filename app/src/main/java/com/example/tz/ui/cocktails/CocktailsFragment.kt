@@ -14,7 +14,7 @@ class CocktailsFragment : Fragment() {
 
     private lateinit var cocktailsViewModel: CocktailsViewModel
 
-    override fun onCreateView(
+    /*override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -27,5 +27,5 @@ class CocktailsFragment : Fragment() {
             textView.text = it
         })
         return root
-    }
+    }*/
 }

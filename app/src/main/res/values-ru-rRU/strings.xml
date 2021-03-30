@@ -27,4 +27,6 @@
     <string name="title_activity_settings">Настройки</string>
     <string name="title_activity_register">Регистрация</string>
     <string name="title_activity_add_new">Добавить новый элемент</string>
+    <string name="empty_db">НЕТ ДАННЫХ!</string>
+    <string name="action_delete_all">Удалить все</string>
 </resources>

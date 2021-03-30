@@ -1,23 +1,41 @@
 package com.example.tz
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.navigation.NavigationView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import android.content.Intent
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.tz.sqlite.CustomAdapter
+import com.example.tz.sqlite.MyDatabaseHelper
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    var recyclerView: RecyclerView? = null
+
+    var myDB: MyDatabaseHelper? = null
+    var book_id: ArrayList<String>? = null
+    var book_author: ArrayList<String>? = null
+    var book_title: ArrayList<String>? = null
+    var book_pages: ArrayList<String>? = null
+    var customAdapter: CustomAdapter? = null
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,9 +43,24 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+        recyclerView = findViewById(R.id.recyclerView)
+
+        myDB = MyDatabaseHelper(this@MainActivity)
+        book_id = ArrayList()
+        book_title = ArrayList()
+        book_author = ArrayList()
+        book_pages = ArrayList()
+
+        storeDataInArrays()
+
+        customAdapter = CustomAdapter(this@MainActivity, this, book_id!!, book_title!!, book_author!!,
+                book_pages!!)
+        recyclerView?.adapter = customAdapter
+        recyclerView?.layoutManager = LinearLayoutManager(this@MainActivity)
+
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener {
-            startActivity(Intent(this, AddNewActivity::class.java))
+            startActivity(Intent(this, AddNewActivity::class.java)) 
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -59,10 +92,55 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, SettingsActivity::class.java))
                 true
             }
+            R.id.action_delete_all -> {
+                confirmDialog()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1) {
+            recreate()
+        }
+    }
+
+    fun storeDataInArrays() {
+        val cursor = myDB!!.readAllData()
+        if (cursor!!.count == 0) {
+            Toast.makeText(
+                    applicationContext,
+                    R.string.empty_db,
+                    Toast.LENGTH_LONG
+            ).show()
+        } else {
+            while (cursor.moveToNext()) {
+                book_id!!.add(cursor.getString(0))
+                book_title!!.add(cursor.getString(1))
+                book_author!!.add(cursor.getString(2))
+                book_pages!!.add(cursor.getString(3))
+            }
+        }
+    }
+
+    fun confirmDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Delete All?")
+        builder.setMessage("Are you sure you want to delete all Data?")
+        builder.setPositiveButton("Yes") { dialogInterface, i ->
+            val myDB = MyDatabaseHelper(this@MainActivity)
+            myDB.deleteAllData()
+            //Refresh Activity
+            val intent = Intent(this@MainActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        builder.setNegativeButton("No") { dialogInterface, i -> }
+        builder.create().show()
+    }
 
 }
 
