@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TZ">
         <activity
+            android:name=".sqlite.UpdateActivity"
+            android:label="@string/title_activity_update"/>
+        <activity
             android:name=".AddNewActivity"
             android:label="@string/title_activity_add_new"/>
         <activity

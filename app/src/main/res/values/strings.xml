@@ -33,6 +33,7 @@
     <string name="title_activity_login">Login</string>
     <string name="title_activity_register">Register</string>
     <string name="title_activity_user_settings">User Settings</string>
+    <string name="title_activity_update">Update</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>

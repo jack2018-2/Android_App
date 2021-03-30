@@ -2,6 +2,7 @@ package com.example.tz
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -53,10 +54,6 @@ class MainActivity : AppCompatActivity() {
 
         storeDataInArrays()
 
-        customAdapter = CustomAdapter(this@MainActivity, this, book_id!!, book_title!!, book_author!!,
-                book_pages!!)
-        recyclerView?.adapter = customAdapter
-        recyclerView?.layoutManager = LinearLayoutManager(this@MainActivity)
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener {

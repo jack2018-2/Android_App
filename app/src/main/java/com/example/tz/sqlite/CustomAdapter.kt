@@ -10,12 +10,13 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tz.R
 import java.util.*
 
 
-class CustomAdapter internal constructor(private val activity: Activity, private val context: Context, private val book_id: ArrayList<*>, private val book_title: ArrayList<*>, private val book_author: ArrayList<*>,
+class CustomAdapter internal constructor(private val activity: Fragment, private val context: Context, private val book_id: ArrayList<*>, private val book_title: ArrayList<*>, private val book_author: ArrayList<*>,
                                          private val book_pages: ArrayList<*>) : RecyclerView.Adapter<CustomAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val inflater = LayoutInflater.from(context)
@@ -30,14 +31,14 @@ class CustomAdapter internal constructor(private val activity: Activity, private
         holder.book_author_txt.text = book_author[position].toString()
         holder.book_pages_txt.text = book_pages[position].toString()
         //Recyclerview onClickListener
-        /*holder.mainLayout.setOnClickListener {
+        holder.mainLayout.setOnClickListener {
             val intent = Intent(context, UpdateActivity::class.java)
             intent.putExtra("id", book_id[position].toString())
             intent.putExtra("title", book_title[position].toString())
             intent.putExtra("author", book_author[position].toString())
             intent.putExtra("pages", book_pages[position].toString())
             activity.startActivityForResult(intent, 1)
-        }*/
+        }
     }
 
     override fun getItemCount(): Int {
@@ -45,18 +46,11 @@ class CustomAdapter internal constructor(private val activity: Activity, private
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var book_id_txt: TextView
-        var book_title_txt: TextView
-        var book_author_txt: TextView
-        var book_pages_txt: TextView
-        var mainLayout: LinearLayout
+        var book_id_txt: TextView = itemView.findViewById(R.id.book_id_txt)
+        var book_title_txt: TextView = itemView.findViewById(R.id.book_title_txt)
+        var book_author_txt: TextView = itemView.findViewById(R.id.book_author_txt)
+        var book_pages_txt: TextView = itemView.findViewById(R.id.book_pages_txt)
+        var mainLayout: LinearLayout = itemView.findViewById(R.id.mainLayout)
 
-        init {
-            book_id_txt = itemView.findViewById(R.id.book_id_txt)
-            book_title_txt = itemView.findViewById(R.id.book_title_txt)
-            book_author_txt = itemView.findViewById(R.id.book_author_txt)
-            book_pages_txt = itemView.findViewById(R.id.book_pages_txt)
-            mainLayout = itemView.findViewById(R.id.mainLayout)
-        }
     }
 }

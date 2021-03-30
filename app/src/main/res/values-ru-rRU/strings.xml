@@ -29,4 +29,5 @@
     <string name="title_activity_add_new">Добавить новый элемент</string>
     <string name="empty_db">НЕТ ДАННЫХ!</string>
     <string name="action_delete_all">Удалить все</string>
+    <string name="title_activity_update">Изменение</string>
 </resources>
