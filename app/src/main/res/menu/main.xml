@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
@@ -10,7 +11,7 @@
     <item
         android:id="@+id/action_search"
         android:orderInCategory="100"
-        android:title="@string/navigation_drawer_close"
+        android:title="TODO"
         android:icon="@drawable/ic_baseline_search_24"
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
@@ -19,4 +20,5 @@
         android:id="@+id/action_delete_all"
         android:title="@string/action_delete_all"
         app:showAsAction="never"/>
+
 </menu>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tz.sqlite.MyDatabaseHelper
 
@@ -28,17 +29,32 @@ class AddNewActivity : AppCompatActivity() {
                 true
             }
             R.id.add_button -> {
-                //TODO: add submit logic
-                var title_input = findViewById<EditText>(R.id.title_input)
-                var author_input = findViewById<EditText>(R.id.author_input)
-                var pages_input = findViewById<EditText>(R.id.pages_input)
+                val title_input = findViewById<EditText>(R.id.title_input)
+                val author_input = findViewById<EditText>(R.id.author_input)
+                val pages_input = findViewById<EditText>(R.id.pages_input)
 
-                val myDB = MyDatabaseHelper(this@AddNewActivity)
+                if (title_input?.text.toString().trim().isNotEmpty() &&
+                        author_input?.text.toString().trim().isNotEmpty()
+                        && pages_input?.text.toString().trim().isNotEmpty()
+                ) {
+                    val myDB = MyDatabaseHelper(this@AddNewActivity)
+                    myDB.addBook(title_input.text.toString().trim { it <= ' ' },
+                            author_input.text.toString().trim { it <= ' ' },
+                            Integer.valueOf(pages_input.text.toString().trim { it <= ' ' }))
+                    finish()
+                    true
+                } else {
+                    Toast.makeText(this, "Not valid data!", Toast.LENGTH_SHORT).show()
+                    false
+                }
+
+
+                /*val myDB = MyDatabaseHelper(this@AddNewActivity)
                 myDB.addBook(title_input.text.toString().trim { it <= ' ' },
                         author_input.text.toString().trim { it <= ' ' },
                         Integer.valueOf(pages_input.text.toString().trim { it <= ' ' }))
                 finish()
-                true
+                true*/
             }
             else -> super.onOptionsItemSelected(item)
         }

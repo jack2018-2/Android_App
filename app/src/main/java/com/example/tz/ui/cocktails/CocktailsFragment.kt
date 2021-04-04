@@ -4,24 +4,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.tz.R
 import com.example.tz.sqlite.CustomAdapter
 import com.example.tz.sqlite.MyDatabaseHelper
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.util.*
 
 
 class CocktailsFragment : Fragment() {
 
-    private lateinit var cocktailsViewModel: CocktailsViewModel
-
     var mSwipeRefreshLayout: SwipeRefreshLayout? = null
+
+    private var filter_button : Button? = null
+    private var sort_button : Button? = null
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     private var recyclerView: RecyclerView? = null
@@ -40,8 +43,6 @@ class CocktailsFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        cocktailsViewModel =
-                ViewModelProvider(this).get(CocktailsViewModel::class.java)
 
         val root = inflater.inflate(R.layout.fragment_cocktails, container, false)
 
@@ -49,6 +50,31 @@ class CocktailsFragment : Fragment() {
         mSwipeRefreshLayout = root.findViewById(R.id.swipe_refresh)
         empty_imageview = root.findViewById(R.id.empty_imageview)
         no_data = root.findViewById(R.id.no_data)
+        filter_button = root.findViewById(R.id.filter_cocktails_button)
+        sort_button = root.findViewById(R.id.sort_cocktails_button)
+
+
+        //SHEET FILTER
+        val btnsheetfilter = layoutInflater.inflate(R.layout.sheet_filter_cocktails, null)
+
+        filter_button?.setOnClickListener{
+            val bottomSheetDialog =  BottomSheetDialog(this.requireContext())
+            bottomSheetDialog.setContentView(btnsheetfilter)
+            val bottomSheetView = LayoutInflater.from(this.requireContext()).inflate(R.layout.sheet_filter_cocktails, root.findViewById(R.id.cocktails_filter_sheet))
+            bottomSheetDialog.setContentView(bottomSheetView)
+            bottomSheetDialog.show()
+        }
+        //SHEET SORT
+        val btnsheetsort = layoutInflater.inflate(R.layout.sheet_sort_cocktails, null)
+
+        sort_button?.setOnClickListener{
+            val bottomSheetDialog =  BottomSheetDialog(this.requireContext())
+            bottomSheetDialog.setContentView(btnsheetsort)
+            val bottomSheetView = LayoutInflater.from(this.requireContext()).inflate(R.layout.sheet_sort_cocktails, root.findViewById(R.id.cocktails_sort_sheet))
+            bottomSheetDialog.setContentView(bottomSheetView)
+            bottomSheetDialog.show()
+        }
+        ///////////
 
         setSwipeRefreshLayout()
 
@@ -60,13 +86,16 @@ class CocktailsFragment : Fragment() {
 
         storeDataInArrays()
 
+
         customAdapter = CustomAdapter(this@CocktailsFragment, this.requireContext(), book_id!!, book_title!!, book_author!!,
                 book_pages!!)
         recyclerView?.adapter = customAdapter
+        //customAdapter?.setData(book_id, book_title, book_author, book_pages)
         recyclerView?.layoutManager = LinearLayoutManager(this@CocktailsFragment.requireContext())
 
         return root
     }
+
 
     private fun setSwipeRefreshLayout() {
         mSwipeRefreshLayout?.setOnRefreshListener {
@@ -78,6 +107,7 @@ class CocktailsFragment : Fragment() {
             book_pages?.clear()
             storeDataInArrays()
             recyclerView?.layoutManager = LinearLayoutManager(this@CocktailsFragment.requireContext())
+            //customAdapter?.setData(book_id, book_title, book_author, book_pages)
 
             mSwipeRefreshLayout?.isRefreshing = false // set false to dismiss the progress loader once your job is done
         }

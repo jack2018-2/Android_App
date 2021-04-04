@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Messages Preferences -->
+    <string name="signature_title">Ваша сигнатура</string>
+    <string name="reply_title">Стандартное действие в ответ</string>
+
     <string name="app_name">Мой бар</string>
     <string name="menu_account">Личный кабинет</string>
     <string name="menu_shopping">Список покупок</string>
@@ -27,7 +31,9 @@
     <string name="title_activity_settings">Настройки</string>
     <string name="title_activity_register">Регистрация</string>
     <string name="title_activity_add_new">Добавить новый элемент</string>
-    <string name="empty_db">НЕТ ДАННЫХ!</string>
+    <string name="empty_db">Нет данных!</string>
     <string name="action_delete_all">Удалить все</string>
     <string name="title_activity_update">Изменение</string>
+    <string name="filters">Фильтры</string>
+    <string name="sort">Сортировать</string>
 </resources>

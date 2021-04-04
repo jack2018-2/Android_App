@@ -86,14 +86,21 @@ class UpdateActivity : AppCompatActivity() {
                 true
             }
             R.id.add_button -> {
-                //TODO: add empty text check
-                val myDB = MyDatabaseHelper(this@UpdateActivity)
-                title = title_input?.text.toString().trim { it <= ' ' }
-                author = author_input?.text.toString().trim { it <= ' ' }
-                pages = pages_input?.text.toString().trim { it <= ' ' }
-                myDB.updateData(id!!, title, author, pages)
-                finish()
-                true
+                if (title_input?.text.toString().trim().isNotEmpty() &&
+                        author_input?.text.toString().trim().isNotEmpty()
+                        && pages_input?.text.toString().trim().isNotEmpty()
+                ) {
+                    val myDB = MyDatabaseHelper(this@UpdateActivity)
+                    title = title_input?.text.toString().trim { it <= ' ' }
+                    author = author_input?.text.toString().trim { it <= ' ' }
+                    pages = pages_input?.text.toString().trim { it <= ' ' }
+                    myDB.updateData(id!!, title, author, pages)
+                    finish()
+                    true
+                } else {
+                    Toast.makeText(this, "Not valid data!", Toast.LENGTH_SHORT).show()
+                    false
+                }
             }
             else -> super.onOptionsItemSelected(item)
         }
