@@ -12,7 +12,9 @@
     <string name="menu_favourite">Favourite</string>
     <string name="menu_shopping">Shopping list</string>
     <string name="menu_account">My account</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_add_new">Add new component</string>
+
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
@@ -25,7 +27,27 @@
     <!-- Sync Preferences -->
     <string name="sync_title">Sync email periodically</string>
     <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_user_settings">User Settings</string>
+    <string name="title_activity_update">Update</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="register_above_text">Don\'t have an account yet?</string>
+    <string name="action_register">Create account</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="empty_db">No data!</string>
+    <string name="action_delete_all">Delete all</string>
+    <string name="filters">Filters</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sort">Sort</string>
 </resources>

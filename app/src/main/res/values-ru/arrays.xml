@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="cocktail_filter">
+        <item>Крепкие</item>
+        <item>Средней крепости</item>
+        <item>Мягкие</item>
+        <item>Лонги</item>
+        <item>Шоты</item>
+        <item>Безалкогольные</item>
+    </string-array>
+
+</resources>

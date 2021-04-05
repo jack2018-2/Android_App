@@ -28,5 +28,10 @@
         android:name="com.example.tz.ui.shopping_list.ShoppingFragment"
         android:label="@string/menu_shopping"
         tools:layout="@layout/fragment_shopping" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.example.tz.ui.ui.login.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login"/>
 
 </navigation>
