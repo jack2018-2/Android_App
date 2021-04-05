@@ -48,13 +48,6 @@ class AddNewActivity : AppCompatActivity() {
                     false
                 }
 
-
-                /*val myDB = MyDatabaseHelper(this@AddNewActivity)
-                myDB.addBook(title_input.text.toString().trim { it <= ' ' },
-                        author_input.text.toString().trim { it <= ' ' },
-                        Integer.valueOf(pages_input.text.toString().trim { it <= ' ' }))
-                finish()
-                true*/
             }
             else -> super.onOptionsItemSelected(item)
         }

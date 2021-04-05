@@ -7,6 +7,7 @@
     tools:context=".ui.cocktails.CocktailsFragment">
 
     <LinearLayout
+        style="@style/MyActionBarButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimaryVariant"
@@ -16,6 +17,7 @@
 
         <Button
             style="@style/MyActionBarButton"
+            android:textColor="@color/hektar_text_light"
             android:id="@+id/filter_cocktails_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -27,6 +29,7 @@
         <Button
             style="@style/MyActionBarButton"
             android:id="@+id/sort_cocktails_button"
+            android:textColor="@color/hektar_text_light"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"

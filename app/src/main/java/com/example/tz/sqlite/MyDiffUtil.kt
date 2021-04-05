@@ -4,14 +4,14 @@ import androidx.recyclerview.widget.DiffUtil
 import java.util.ArrayList
 
 class MyDiffUtil(
-        private val oldList_id: ArrayList<String>?,
-        private val newList_id: ArrayList<String>?,
-        private val oldList_title: ArrayList<String>?,
-        private val newList_title: ArrayList<String>?,
-        private val oldList_author: ArrayList<String>?,
-        private val newList_author: ArrayList<String>?,
-        private val oldList_pages: ArrayList<String>?,
-        private val newList_pages: ArrayList<String>?
+        private var oldList_id: ArrayList<String>?,
+        private var newList_id: ArrayList<String>?,
+        private var oldList_title: ArrayList<String>?,
+        private var newList_title: ArrayList<String>?,
+        private var oldList_author: ArrayList<String>?,
+        private var newList_author: ArrayList<String>?,
+        private var oldList_pages: ArrayList<String>?,
+        private var newList_pages: ArrayList<String>?
         ) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int {

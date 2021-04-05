@@ -1,6 +1,5 @@
 package com.example.tz.sqlite
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -56,7 +55,29 @@ class CustomAdapter internal constructor(private val activity: Fragment, private
                 book_title, new_list_title,
                 book_author, new_list_author,
                 book_pages, new_list_pages)
-        val diffResults = DiffUtil.calculateDiff(diffUtil)
+        //val diffResults = DiffUtil.calculateDiff(diffUtil)
+        val diffResults : DiffUtil.DiffResult = DiffUtil.calculateDiff(MyDiffUtil(
+                book_id, new_list_id,
+                book_title, new_list_title,
+                book_author, new_list_author,
+                book_pages, new_list_pages))
+        book_id = new_list_id
+        book_title = new_list_title
+        book_author = new_list_author
+        book_pages = new_list_pages
+        diffResults.dispatchUpdatesTo(this)
+    }
+
+    fun updateData(new_list_id: ArrayList<String>?,
+                new_list_title: ArrayList<String>?,
+                new_list_author: ArrayList<String>?,
+                new_list_pages: ArrayList<String>?
+    ) {
+        val diffResults : DiffUtil.DiffResult = DiffUtil.calculateDiff(MyDiffUtil(
+                book_id, new_list_id,
+                book_title, new_list_title,
+                book_author, new_list_author,
+                book_pages, new_list_pages))
         book_id = new_list_id
         book_title = new_list_title
         book_author = new_list_author

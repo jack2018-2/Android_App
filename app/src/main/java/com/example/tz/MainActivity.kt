@@ -23,20 +23,15 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    private var recyclerView: RecyclerView? = null
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        recyclerView = findViewById(R.id.recyclerView)
-
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener {
+            //TODO: add screen check
             startActivity(Intent(this, AddNewActivity::class.java)) 
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
@@ -45,9 +40,10 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.nav_cocktails, R.id.nav_ingredients, R.id.nav_favourite, R.id.nav_shopping, R.id.loginActivity), drawerLayout)
+                    R.id.nav_cocktails, R.id.nav_ingredients, R.id.nav_favourite, R.id.nav_shopping, R.id.loginActivity), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
